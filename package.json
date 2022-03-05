@@ -1,0 +1,12 @@
+{
+  "name": "a-cli",
+  "version": "1.0.0",
+  "bin": {
+    "a-cli": "./index.js"
+  },
+  "license": "GPT2",
+  "devDependencies": {
+    "fs-extra": "^10.0.1",
+    "inquirer": "^8.2.0"
+  }
+}
