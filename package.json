@@ -1,8 +1,8 @@
 {
-  "name": "a-cli",
-  "version": "1.0.0",
+  "name": "ak47-cli",
+  "version": "1.1.0",
   "bin": {
-    "a-cli": "./index.js"
+    "ak": "./index.js"
   },
   "license": "MIT",
   "devDependencies": {
