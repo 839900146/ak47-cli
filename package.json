@@ -1,8 +1,11 @@
 {
   "name": "ak47-cli",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "bin": {
     "ak": "./index.js"
+  },
+  "scripts": {
+    "push": "git push"
   },
   "license": "MIT",
   "dependencies": {
