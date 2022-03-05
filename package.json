@@ -5,7 +5,7 @@
     "ak": "./index.js"
   },
   "license": "MIT",
-  "devDependencies": {
+  "dependencies": {
     "fs-extra": "^10.0.1",
     "inquirer": "^8.2.0"
   }
