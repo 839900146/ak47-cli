@@ -34,6 +34,11 @@ inquirer.prompt([
     fs.mkdirSync(projectRoot);
 
     fs.copySync(path.join(templateRoot, answers.type), projectRoot, { overwrite: true });
+
+    console.log(`项目 ${answers.projectName} 已创建成功, 可执行以下命令: \n\n`);
+    console.log(`cd ${projectRoot}`);
+    console.log(`yarn install`);
+    console.log(`---------------------------------------------------------`);
 })
 
 
