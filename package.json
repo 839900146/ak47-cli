@@ -4,9 +4,6 @@
   "bin": {
     "ak": "./index.js"
   },
-  "scripts": {
-    "push": "git push"
-  },
   "homepage": "https://github.com/839900146/ak47-cli",
   "license": "MIT",
   "dependencies": {
