@@ -22,8 +22,8 @@ inquirer.prompt([
         name: 'type',
         message: '请选择要使用的框架',
         choices: [
-            { value: 'react-admin', name: 'react-admin' },
-            { value: 'react-web-ts-vite', name: 'react-web-ts-vite' },
+            { value: 'react-admin', name: '管理系统模板: react + antd + umi + dva + ts' },
+            { value: 'react-web-ts-vite', name: '通用网站模板: react + ts + vite' },
         ],
     },
 ]).then(answers => {

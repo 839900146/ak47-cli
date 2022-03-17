@@ -14,6 +14,9 @@ export default defineConfig({
 			{ find: '@config', replacement: resolve(__dirname, 'config') },
 			{ find: '@cpt', replacement: resolve(__dirname, 'src/component') },
 			{ find: '@views', replacement: resolve(__dirname, 'src/views') },
+			{ find: '@utils', replacement: resolve(__dirname, 'src/utils') },
+			{ find: '@services', replacement: resolve(__dirname, 'src/services') },
+			{ find: '@router', replacement: resolve(__dirname, 'src/router') },
 		],
 	},
 	plugins: [

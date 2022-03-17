@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom'
 import Layout from '@cpt/Layout/Layout'
 
 const GetAsyncComponent = (path: string): ReactElement => {
-	const Cpt = lazy(() => import(`../views/${path}`))
+	const Cpt = lazy(() => import(`../views/${path}.tsx`))
 	return (
 		<Suspense fallback={<h1>组件加载中....</h1>}>
 			<Cpt />
