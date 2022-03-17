@@ -20,4 +20,7 @@ module.exports = {
 		sourceType: 'module',
 	},
 	plugins: ['react', '@typescript-eslint'],
+	rules: {
+		'prettier/prettier': ['off', { 'linebreak-style': 'lf' }],
+	},
 }
