@@ -7,7 +7,9 @@
   "homepage": "https://github.com/839900146/ak47-cli",
   "license": "MIT",
   "dependencies": {
+    "chalk": "4",
     "fs-extra": "^10.0.1",
-    "inquirer": "^8.2.0"
+    "inquirer": "^8.2.0",
+    "shelljs": "^0.8.5"
   }
 }

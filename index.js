@@ -2,44 +2,86 @@
 const fs = require('fs-extra');
 const path = require('path');
 const inquirer = require('inquirer');
-const templateRoot = path.join(__dirname, './templates');
+const shell = require('shelljs');
+const chalk = require('chalk')
 
-inquirer.prompt([
-    {
-        type: 'input',
-        name: 'projectName',
-        message: '请输入项目名',
-        validate: (v) => {
-            try {
-                return v.trim().length > 0 || '项目名不能为空';
-            } catch (error) {
-                return '非法项目名';
+const Repository = {
+    react: {
+        'admin': 'https://github.com/839900146/template-react-ts-umi-admin.git',
+        'web': 'https://github.com/839900146/template-react-ts-vite-web.git',
+    }
+};
+
+(async () => {
+    const answers = await inquirer.prompt([
+        {
+            type: 'input',
+            name: 'projectName',
+            message: '请输入项目名',
+            validate: (v) => {
+                try {
+                    return v.trim().length > 0 || '项目名不能为空';
+                } catch (error) {
+                    return '非法项目名';
+                }
             }
+        },
+        {
+            type: 'list',
+            name: 'framework',
+            message: '请选择要使用的前端框架',
+            choices: [
+                {value: 'react', name: 'react'},
+            ],
+        },
+        {
+            type: 'list',
+            name: 'template',
+            message: '请选择要使用的模板',
+            choices: [
+                {value: 'admin', name: '管理系统'},
+                {value: 'web', name: '通用网站'},
+            ],
         }
-    },
-    {
-        type: 'list',
-        name: 'type',
-        message: '请选择要使用的框架',
-        choices: [
-            { value: 'react-admin', name: '管理系统模板: react + antd + umi + dva + ts' },
-            { value: 'react-web-ts-vite', name: '通用网站模板: react + ts + vite' },
-        ],
-    },
-]).then(answers => {
+    ]);
 
+    // 获取项目的创建位置(包含项目名)
     let projectRoot = path.join(process.cwd(), answers.projectName);
 
-    if (fs.existsSync(projectRoot)) throw Error(`当前目录下已存在 ${answers.projectName}, 创建失败`);
+    // 检测是否有同名项目
+    if (fs.existsSync(projectRoot)) {
+        console.error(chalk.red(`当前目录下已存在 ${answers.projectName}, 创建失败`))
+        shell.exit(1);
+    }
 
-    fs.mkdirSync(projectRoot);
+    // 判断是否安装有git
+    if (!shell.which('git')) {
+        console.error(chalk.red('检测到操作系统未安装git, 请先自行安装!'))
+        shell.exit(1);
+    }
 
-    fs.copySync(path.join(templateRoot, answers.type), projectRoot, { overwrite: true });
+    // 创建项目文件夹
+    try {
+        fs.mkdirSync(projectRoot);
+    } catch (e) {
+        console.error(e);
+        console.error(chalk.red('项目文件夹创建失败'));
+    }
 
-    console.log(`项目 ${answers.projectName} 已创建成功, 可执行以下命令: \n\n`);
-    console.log(`cd ${projectRoot}`);
-    console.log(`yarn install`);
-    console.log(`---------------------------------------------------------`);
-})
+    // 获取对应仓库的url
+    const cloneUrl = Repository[answers.framework][answers.template];
 
+    // 下载模板
+    if (shell.exec(`git clone ${cloneUrl} ${projectRoot}`).code !== 0) {
+        console.log(chalk.red('Error: Git clone 错误'))
+        shell.exit(1);
+    }
 
+    // 成功
+    console.log(chalk.blue('\r\n=========================================\r\n'))
+    console.log(chalk.green('项目创建成功, 可执行以下命令开始体验\r\n'))
+    console.log(chalk.green(`cd ./${answers.projectName}`))
+    console.log(chalk.green(`npm install or yarn install`))
+    console.log(chalk.blue('\r\n=========================================\r\n'))
+
+})();
