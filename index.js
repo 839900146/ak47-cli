@@ -7,8 +7,8 @@ const chalk = require('chalk')
 
 const Repository = {
     react: {
-        'admin': 'git@gitee.com:ssg-wangyue/template-react-ts-umi-admin.git',
-        'web': 'git@gitee.com:ssg-wangyue/template-react-ts-vite-web.git',
+        'admin': 'https://gitee.com/ssg-wangyue/template-react-ts-umi-admin.git',
+        'web': 'https://gitee.com/ssg-wangyue/template-react-ts-vite-web.git',
     }
 };
 
