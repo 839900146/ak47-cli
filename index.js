@@ -10,7 +10,7 @@ const Repository = {
         'admin': 'https://gitee.com/ssg-wangyue/template-react-ts-umi-admin.git',
     },
     vue: {
-        'web': 'https://gitee.com/ssg-wangyue/template-react-ts-vite-web.gitt',
+        'web': 'https://gitee.com/ssg-wangyue/template-react-ts-vite-web.git',
     }
 };
 
@@ -43,9 +43,22 @@ const Repository = {
             message: '请选择要使用的模板',
             choices: [
                 {value: 'admin', name: '管理系统'},
+            ],
+            when(answers) {
+                return answers.framework === 'react'
+            }
+        },
+        {
+            type: 'list',
+            name: 'template',
+            message: '请选择要使用的模板',
+            choices: [
                 {value: 'web', name: '通用网站'},
             ],
-        }
+            when(answers) {
+                return answers.framework === 'vue'
+            }
+        },
     ]);
 
     // 获取对应仓库的url
