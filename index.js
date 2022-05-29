@@ -8,7 +8,9 @@ const chalk = require('chalk')
 const Repository = {
     react: {
         'admin': 'https://gitee.com/ssg-wangyue/template-react-ts-umi-admin.git',
-        'web': 'https://gitee.com/ssg-wangyue/template-react-ts-vite-web.git',
+    },
+    vue: {
+        'web': 'https://gitee.com/ssg-wangyue/template-react-ts-vite-web.gitt',
     }
 };
 
@@ -32,6 +34,7 @@ const Repository = {
             message: '请选择要使用的前端框架',
             choices: [
                 {value: 'react', name: 'react'},
+                {value: 'vue', name: 'vue'},
             ],
         },
         {
@@ -44,6 +47,14 @@ const Repository = {
             ],
         }
     ]);
+
+    // 获取对应仓库的url
+    const cloneUrl = Repository[answers.framework][answers.template];
+
+    if(!cloneUrl) {
+        console.error(chalk.red(`${answers.framework}-${answers.template} 暂不支持`))
+        shell.exit(1);
+    }
 
     // 获取项目的创建位置(包含项目名)
     let projectRoot = path.join(process.cwd(), answers.projectName);
@@ -67,9 +78,6 @@ const Repository = {
         console.error(e);
         console.error(chalk.red('项目文件夹创建失败'));
     }
-
-    // 获取对应仓库的url
-    const cloneUrl = Repository[answers.framework][answers.template];
 
     // 下载模板
     if (shell.exec(`git clone ${cloneUrl} ${projectRoot}`).code !== 0) {
