@@ -1,6 +1,6 @@
 {
   "name": "ak47-cli",
-  "version": "1.2.3",
+  "version": "1.2.6",
   "bin": {
     "ak": "./index.js"
   },
