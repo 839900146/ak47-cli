@@ -11,6 +11,7 @@ const Repository = {
     },
     vue: {
         'web': 'https://gitee.com/ssg-wangyue/template-react-ts-vite-web.git',
+        'uniapp-vue2': 'https://gitee.com/ssg-wangyue/template-uniapp-vue2.git'
     }
 };
 
@@ -54,6 +55,7 @@ const Repository = {
             message: '请选择要使用的模板',
             choices: [
                 {value: 'web', name: '通用网站'},
+                {value: 'uniapp-vue2', name: 'uniapp-vue2'},
             ],
             when(answers) {
                 return answers.framework === 'vue'
